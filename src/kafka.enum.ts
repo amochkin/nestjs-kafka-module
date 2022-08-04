@@ -1,0 +1,6 @@
+export enum EKafkaStatus {
+	DISCONNECTED,
+	CONNECTING,
+	CONNECTED,
+	ERROR,
+}
