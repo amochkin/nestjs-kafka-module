@@ -64,7 +64,7 @@
   "dependencies": {
     "@nestjs/common": "^9.0.8",
     "@nestjs/config": "^2.2.0",
-    "@xorde-labs/log-utils": "^0.0.3",
+    "@xorde-labs/log-utils": "^0.0.4",
     "joi": "^17.6.0",
     "kafkajs": "^2.1.0",
     "reflect-metadata": "^0.1.13",

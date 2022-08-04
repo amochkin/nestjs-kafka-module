@@ -1220,10 +1220,10 @@
   resolved "https://registry.yarnpkg.com/@webpack-cli/serve/-/serve-1.7.0.tgz#e1993689ac42d2b16e9194376cfb6753f6254db1"
   integrity sha512-oxnCNGj88fL+xzV+dacXs44HcDwf1ovs3AuEzvP7mqXw7fQntqIhQ1BRmynh4qEKQSSSRSWVyXRjmTbZIX9V2Q==
 
-"@xorde-labs/log-utils@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@xorde-labs/log-utils/-/log-utils-0.0.3.tgz#e14e74e34a6365412181afe2604d44ba024d0f32"
-  integrity sha512-NDF7pxpuhwUzD8bKX8nj9s3jshvXW9kBTTC+6ftOJoUaIEJRs/bk5Cplp8gXZjWITHzLMLtvOghCF0eAPMP+Rw==
+"@xorde-labs/log-utils@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@xorde-labs/log-utils/-/log-utils-0.0.4.tgz#1a29d1a3f3e290dcb4b9325b076dff295002d3f9"
+  integrity sha512-v3vvzC1Lpv0BwcKF8a5+lHVhiRkdokG6yEkvylo4+yq3jOp3VphoO3pHhcWMQ1F0ySTWFQe/AXzCHBqEVbCjwA==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
