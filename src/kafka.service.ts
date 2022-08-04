@@ -23,7 +23,7 @@ export class KafkaService extends EventService {
 	private topicHandlers: TKafkaTopicHandlers = KafkaDecoratorsInterface.handlers;
 	private kafkaStatus: KafkaStatus = new KafkaStatus();
 	private kafka: Kafka;
-	private consumer: Consumer;
+	private readonly consumer: Consumer;
 	private producer: Producer;
 	private admin: Admin;
 	errors = 0;
