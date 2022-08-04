@@ -1,6 +1,7 @@
 # Package @xorde-labs/nestjs-kafka-module
 
-
+[![Release & Publish](https://github.com/xorde-labs/nestjs-kafka-module/actions/workflows/publish.yml/badge.svg)](https://github.com/xorde-labs/nestjs-kafka-module/actions/workflows/publish.yml)
+[![Tests](https://github.com/xorde-labs/nestjs-kafka-module/actions/workflows/tests.yml/badge.svg)](https://github.com/xorde-labs/nestjs-kafka-module/actions/workflows/tests.yml)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
 Kafka Module for NestJs with extended features
@@ -16,7 +17,6 @@ This module also allows subscribers to use special topic name `*` that will rece
 #### Topic naming convention
 
 https://devshawn.com/blog/apache-kafka-topic-naming-conventions/
-
 
 ### Decorator
 
