@@ -3,9 +3,9 @@
  */
 
 import { EachMessagePayload } from 'kafkajs';
-import { TKafkaTopicName } from './interfaces/topic';
+import { TKafkaTopicName } from './interfaces/IKafkaTopic';
 import { KafkaService } from './kafka.service';
-import { KafkaMessageExt } from './interfaces/message';
+import { KafkaMessageExt } from './interfaces/IMessagePayload';
 
 export interface IKafkaTopicConsumerOptions {
 	fromBeginning: boolean;

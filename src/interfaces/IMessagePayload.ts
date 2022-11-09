@@ -1,6 +1,6 @@
 import { EachMessagePayload, IHeaders } from 'kafkajs';
 
-export interface MessagePayload extends Omit<EachMessagePayload, 'message'> {
+export interface IMessagePayload extends Omit<EachMessagePayload, 'message'> {
 	topic: string;
 	partition: number;
 	message: KafkaMessageExt;
