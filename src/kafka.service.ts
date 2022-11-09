@@ -1,9 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Admin, Consumer, Kafka, logCreator, LogEntry, logLevel, Producer, ProducerRecord } from 'kafkajs';
 import { p, v } from '@xorde-labs/log-utils';
-import { KafkaMessageExt, MessagePayload } from './interfaces/message';
+import { KafkaMessageExt, IMessagePayload } from './interfaces/IMessagePayload';
 import { kafkaConfig } from './config/config';
-import { EKafkaStatus } from './kafka.enum';
+import { EKafkaStatus } from './enums/EKafkaStatus';
 import { IKafkaTopicConsumerOptions, KafkaDecoratorsInterface, TKafkaTopicHandlers } from './kafka.decorator';
 import { EventEmitter } from 'events';
 
@@ -51,27 +51,25 @@ export class KafkaService extends EventService {
 	};
 
 	/* Modification of standard emitter to allow user to subscribe to all events emitted by subscribing to "*" */
-	emit(type: string | symbol, ...args: MessagePayload[]) {
+	emit(type: string | symbol, ...args: IMessagePayload[]) {
 		super.emit('*', ...args);
 		return super.emit(type, ...args) || super.emit('', ...args);
 	}
 
 	/* Modification of standard subscriber to allow user to subscribe to kafka topic based on event name */
-	on(topic: string | symbol, handler: (payload: MessagePayload) => void, options?: IKafkaTopicConsumerOptions): this {
+	on(topic: string | symbol, handler: (payload: IMessagePayload) => void, options?: IKafkaTopicConsumerOptions): this {
 		super.on(topic, handler);
 		if (typeof topic == 'string' && topic != '*') {
 			const topicHandler = { topic, handler, options };
-			this.subscribe([topicHandler], true);
+			this.subscribe([topicHandler], true).catch((e) => this.logger.error(e));
 			this.topicHandlers.push(topicHandler);
-		} else {
-			this.logger.error('RegExp (and other topic name types) are not yet supported');
 		}
 		return this;
 	}
 
 	private async run() {
 		await this.consumer.run({
-			eachMessage: async (payload: MessagePayload) => this.handleMessage(payload),
+			eachMessage: async (payload: IMessagePayload) => this.handleMessage(payload),
 		});
 	}
 
@@ -79,6 +77,7 @@ export class KafkaService extends EventService {
 		super();
 		this.logger.log('Topics: ' + v(this.topicHandlers.map((m) => m.topic)));
 
+		// Assign self to global variable to allow access from decorators
 		KafkaDecoratorsInterface.instance = this;
 
 		this.kafka = new Kafka({
@@ -177,7 +176,7 @@ export class KafkaService extends EventService {
 		}
 	}
 
-	private handleMessage(payload: MessagePayload) {
+	private handleMessage(payload: IMessagePayload) {
 		/* Convert value buffer type to object type or string type */
 		try {
 			payload.message.value = JSON.parse(payload.message.value.toString());
@@ -192,7 +191,7 @@ export class KafkaService extends EventService {
 			payload.message.key = payload.message.key ? payload.message.key.toString() : null;
 		}
 
-		this.logger.verbose('Message: ' + v(p(payload, ['topic', 'message.key', 'message.timestamp'])));
+		this.logger.verbose('Message: ' + v(p(payload, ['topic', 'message.attributes'])));
 
 		this.emit(payload.topic.toString(), payload);
 	}
